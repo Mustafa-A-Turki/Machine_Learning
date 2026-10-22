@@ -12,8 +12,14 @@ real_x = np.array([
 
 x = real_x-2020
 
+# # this function if x contain 1 feature
+# def polyFeatures(x,order):
+#     return np.hstack(([x**i for i in range(1,order+1)]))
+
+from sklearn.preprocessing import PolynomialFeatures
 def polyFeatures(x,order):
-    return np.hstack(([x**i for i in range(1,order+1)]))
+    poly = PolynomialFeatures(degree=order)
+    return poly.fit_transform(x)
 
 x_new = polyFeatures(x,3)
 
@@ -34,7 +40,6 @@ w = np.array([
     [0.8]
 ])
 
-x_new = np.hstack((np.ones(shape=x.shape),x_new))
 
 lr = 0.0001
 m = len(x)
